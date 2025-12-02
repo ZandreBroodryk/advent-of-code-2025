@@ -12,4 +12,8 @@ fn main() {
     let result = day_2::part_1(Some(InputTypes::MyInput));
 
     println!("The answer for day 2 part 1 is: {result}");
+
+    let result = day_2::part_2(Some(InputTypes::MyInput));
+
+    println!("The answer for day 2 part 2 is: {result}");
 }
