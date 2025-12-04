@@ -11,3 +11,22 @@ impl InputTypes {
         }
     }
 }
+
+pub enum Direction {
+    Up,
+    Down,
+    Left,
+    Right
+}
+
+#[derive(PartialEq, Eq, PartialOrd, Ord, Debug)]
+pub struct Coordinate {
+    pub x: i32,
+    pub y: i32
+}
+
+#[derive(Debug)]
+pub struct Tile {
+    pub coordinate: Coordinate,
+    pub contents: char,
+}
