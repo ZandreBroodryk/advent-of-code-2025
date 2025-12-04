@@ -25,11 +25,11 @@ fn main() {
 
     println!("The answer for day 3 part 2 is: {result}");
 
-    let result = day_4::part_1(InputTypes::MyInput);
+    let result = day_4::part_1(InputTypes::Example);
 
     println!("The answer for day 4 part 1 is: {result}");
 
-    // let result = day_4::part_2(InputTypes::Example);
+    let result = day_4::part_2(InputTypes::MyInput);
 
-    // println!("The answer for day 4 part 2 is: {result}");
+    println!("The answer for day 4 part 2 is: {result}");
 }

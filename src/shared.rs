@@ -19,7 +19,7 @@ pub enum Direction {
     Right
 }
 
-#[derive(PartialEq, Eq, PartialOrd, Ord, Debug)]
+#[derive(PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Clone, Copy)]
 pub struct Coordinate {
     pub x: i32,
     pub y: i32
