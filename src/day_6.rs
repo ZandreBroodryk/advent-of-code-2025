@@ -3,7 +3,28 @@ use crate::shared::InputTypes;
 
 pub mod read_input;
 
-pub fn part_1(input: InputTypes) -> usize {
+pub enum Operation {
+    Plus,
+    Multiply,
+}
+
+pub struct MathProblem {
+    pub numbers: Vec<u64>,
+    pub operator: Operation,
+}
+
+impl MathProblem {
+    pub fn find_solution(&self) -> u64 {
+        match self.operator {
+            Operation::Plus => self.numbers.iter().sum(),
+            Operation::Multiply => self.numbers.iter().product(),
+        }
+    }
+}
+
+pub fn part_1(input: InputTypes) -> u64 {
     let input = read_input(Some(input)).expect("Error reading Input");
-    return input.len();
+
+    let result = input.iter().map(|problem| problem.find_solution()).sum();
+    return result;
 }

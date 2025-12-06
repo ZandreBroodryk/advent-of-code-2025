@@ -1,11 +1,50 @@
 use std::{fs, io::Error};
 
-use crate::shared::InputTypes;
+use crate::{
+    day_6::{MathProblem, Operation},
+    shared::InputTypes,
+};
 
-pub fn read_input(input: Option<InputTypes>) -> Result<String, Error> {
+pub fn read_input(input: Option<InputTypes>) -> Result<Vec<MathProblem>, Error> {
     let input = input.unwrap_or(InputTypes::Example);
     let path = format!("src/day_6/{}", input.to_file_name());
     let string_contents = fs::read_to_string(path)?;
 
-    Ok(string_contents)
+    let mut lines = string_contents.lines().collect::<Vec<&str>>();
+
+    let signs = lines
+        .pop()
+        .expect("Incorrect input format, no text")
+        .replace(" ", "");
+
+    let mut result = signs
+        .chars()
+        .map(|operator| {
+            let operator = match operator {
+                '+' => Operation::Plus,
+                '*' => Operation::Multiply,
+                _ => panic!("Incorrect input format"),
+            };
+            return MathProblem {
+                numbers: vec![],
+                operator,
+            };
+        })
+        .collect::<Vec<MathProblem>>();
+
+    for line in lines {
+        let mut math_problem_index = 0;
+
+        for number in line.split(" ") {
+            if number.len() == 0 {
+                continue;
+            }
+
+            let number = number.parse().expect("Incorrect input format");
+            result[math_problem_index].numbers.push(number);
+            math_problem_index += 1;
+        }
+    }
+
+    Ok(result)
 }
