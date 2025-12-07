@@ -1,4 +1,4 @@
-use advent_of_code_2025::{day_1, day_2, day_3, day_4, day_5, day_6, shared::InputTypes};
+use advent_of_code_2025::{day_1, day_2, day_3, day_4, day_5, day_6, day_7, shared::InputTypes};
 
 fn main() {
     let result = day_1::part_1(Some(InputTypes::Example));
@@ -45,7 +45,15 @@ fn main() {
 
     println!("The answer for day 6 part 1 is: {result}");
 
-    let result = day_6::part_2(InputTypes::MyInput);
+    let result = day_6::part_2(InputTypes::Example);
 
     println!("The answer for day 6 part 2 is: {result}");
+
+    let result = day_7::part_1(InputTypes::Example);
+
+    println!("The answer for day 7 part 1 is: {result}");
+
+    // let result = day_6::part_2(InputTypes::Example);
+
+    // println!("The answer for day 7 part 2 is: {result}");
 }
