@@ -16,13 +16,13 @@ pub enum Direction {
     Up,
     Down,
     Left,
-    Right
+    Right,
 }
 
 #[derive(PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Clone, Copy)]
 pub struct Coordinate {
     pub x: i32,
-    pub y: i32
+    pub y: i32,
 }
 
 #[derive(Debug)]
@@ -30,3 +30,5 @@ pub struct Tile {
     pub coordinate: Coordinate,
     pub contents: char,
 }
+
+pub struct Space2D<T>(pub Vec<Vec<T>>);
