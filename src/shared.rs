@@ -49,6 +49,26 @@ impl Coordinate {
     }
 }
 
+
+#[derive(PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Clone, Copy)]
+pub struct Coordinate3D {
+    pub x: i32,
+    pub y: i32,
+    pub z: i32,
+}
+
+impl Coordinate3D {
+    pub fn distance_to_point(&self, other: &Coordinate3D) -> f64 {
+        let delta_x = (self.x - other.x) as f64;
+        let delta_y = (self.y - other.y) as f64;
+        let delta_z = (self.z - other.z) as f64;
+
+        let sum_of_squares = delta_x.powi(2) + delta_y.powi(2) + delta_z.powi(2);
+
+        return sum_of_squares.sqrt();
+    }
+}
+
 #[derive(Debug)]
 pub struct Tile {
     pub coordinate: Coordinate,
