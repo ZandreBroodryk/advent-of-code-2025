@@ -63,15 +63,15 @@ fn main() {
 
     println!("The answer for day 8 part 1 is: {result}");
 
-    let result = day_8::part_2(InputTypes::MyInput);
+    let result = day_8::part_2(InputTypes::Example);
 
     println!("The answer for day 8 part 2 is: {result}");
 
-    let result = day_9::part_1(InputTypes::MyInput);
+    let result = day_9::part_1(InputTypes::Example);
 
     println!("The answer for day 9 part 1 is: {result}");
 
-    // let result = day_9::part_2(InputTypes::Example);
+    let result = day_9::part_2(InputTypes::Example);
 
-    // println!("The answer for day 9 part 2 is: {result}");
+    println!("The answer for day 9 part 2 is: {result}");
 }
