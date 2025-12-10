@@ -1,4 +1,4 @@
-use crate::day_10::read_input::read_input;
+use crate::day_11::read_input::read_input;
 use crate::shared::InputTypes;
 
 pub mod read_input;
