@@ -65,6 +65,52 @@ impl Machine {
             machines = new_states;
         }
     }
+    fn press_button_joltage(&mut self, button_number: usize) -> Result<(), String> {
+        for joltage_counter in &self.buttons[button_number] {
+            if self.joltage[*joltage_counter] == 0 {
+                return Err("Invalid button press".to_string());
+            }
+            self.joltage[*joltage_counter] -= 1;
+        }
+        return Ok(());
+    }
+
+    fn is_joltage_in_correct_state(&self) -> bool {
+        self.joltage.iter().all(|counter| *counter == 0)
+    }
+
+    fn get_next_joltage_states(&self) -> Vec<Self> {
+        let mut machines = vec![];
+        for button_number in 0..self.buttons.len() {
+            let mut new_machine = self.clone();
+
+            if let Ok(_) = new_machine.press_button_joltage(button_number) {
+                machines.push(new_machine);
+            }
+        }
+
+        return machines;
+    }
+
+    fn find_minimum_press_count_for_joltage(&self) -> usize {
+        let mut press_count = 1;
+        let mut machines = self.get_next_joltage_states();
+
+        loop {
+            for machine in &machines {
+                if machine.is_joltage_in_correct_state() {
+                    return press_count;
+                }
+            }
+            press_count += 1;
+
+            let mut new_states = vec![];
+            for machine in &machines {
+                new_states.append(&mut machine.get_next_joltage_states());
+            }
+            machines = new_states;
+        }
+    }
 }
 
 pub fn part_1(input: InputTypes) -> usize {
@@ -80,7 +126,6 @@ pub fn part_1(input: InputTypes) -> usize {
             let mut answer = result.lock().unwrap();
 
             *answer += presses;
-            dbg!(*answer);
         });
         handles.push(handle);
     }
@@ -97,5 +142,25 @@ pub fn part_1(input: InputTypes) -> usize {
 pub fn part_2(input: InputTypes) -> usize {
     let input = read_input(Some(input)).expect("Error reading Input");
 
-    return input.len();
+    let result = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+
+    for machine in input {
+        let result = Arc::clone(&result);
+        let handle = thread::spawn(move || {
+            let presses = machine.find_minimum_press_count_for_joltage();
+            let mut answer = result.lock().unwrap();
+
+            *answer += presses;
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    let result = *result.lock().unwrap();
+
+    return result;
 }
