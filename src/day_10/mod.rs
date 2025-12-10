@@ -1,3 +1,4 @@
+use std::collections::HashSet;
 use std::sync::{Arc, Mutex};
 use std::{thread, usize};
 
@@ -96,6 +97,8 @@ impl Machine {
         let mut press_count = 1;
         let mut machines = self.get_next_joltage_states();
 
+        let mut cache = HashSet::new();
+
         loop {
             for machine in &machines {
                 if machine.is_joltage_in_correct_state() {
@@ -106,7 +109,10 @@ impl Machine {
 
             let mut new_states = vec![];
             for machine in &machines {
-                new_states.append(&mut machine.get_next_joltage_states());
+                let is_new_state = cache.insert(machine.joltage.clone());
+                if is_new_state {
+                    new_states.append(&mut machine.get_next_joltage_states());
+                }
             }
             machines = new_states;
         }
