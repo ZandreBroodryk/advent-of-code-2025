@@ -87,7 +87,7 @@ fn main() {
 
     println!("The answer for day 11 part 1 is: {result}");
 
-    let result = day_11::part_2(InputTypes::MyInput);
+    let result = day_11::part_2(InputTypes::Example);
 
     println!("The answer for day 11 part 2 is: {result}");
 }

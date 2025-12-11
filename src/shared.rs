@@ -10,6 +10,12 @@ impl InputTypes {
             InputTypes::MyInput => "input.txt",
         }
     }
+    pub fn to_file_name_with_part(&self, part_number: u8) -> String {
+        match self {
+            InputTypes::Example => format!("example_part_{}.txt", part_number),
+            InputTypes::MyInput => "input.txt".to_string(),
+        }
+    }
 }
 
 pub enum Direction {
